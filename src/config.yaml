@@ -7,7 +7,7 @@ shared:  # Пример
 model_params:  # REQUIRED KEYWORD, параметры модели (моделей)
   _key_value: False  # KEYWORD, если True, то моделей может быть несколько и тогда их нужно обернуть еще в key-value
 
-  model: LstmCRF  # REQUIRED KEYWORD Имя класса. Сам класс будет сконструирован в registry по этому имени
+  model: LstmCrf  # REQUIRED KEYWORD Имя класса. Сам класс будет сконструирован в registry по этому имени
   # на этом уровне могут лежать параметры для __init__ данной модели, например
   weighted_matrix: vectorizer.embedding_matrix
   nb_labels: vectorizer.tag_size()
