@@ -66,8 +66,6 @@ class LstmCrf(nn.Module):
     def _get_mask(self, tokens):
         return (tokens != Const.PAD_ID).float()
 
-    def _pad_sequence(self, ):
-
     def _lstm(self, x, x_char):
         emb =self.embeddings(x)
         char_emb = self.cnn_embeddings(x_char)
