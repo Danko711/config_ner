@@ -32,8 +32,8 @@ args:  # REQUIRED KEYWORD, различные аргументы для Catalyst
 
 runner_params:  # OPTIONAL KEYWORD, параметры для инициализации Runner
   # Например для SupervisedRunner
-  input_key: "features"  # Пример
-  output_key: null  # Пример
+  input_key: ["features", "y"]  # Пример
+  output_key: "preds"  # Пример
 
 
 stages:  # REQUIRED KEYWORD, словарь всех стадий Catalyst, для обучения и/или инфера. Содержат ключевые слова с параметрами, которые применятся ко всем стейджам, так и сами имена стейджей
@@ -52,7 +52,7 @@ stages:  # REQUIRED KEYWORD, словарь всех стадий Catalyst, дл
   criterion_params:  # REQUIRED KEYWORD, параметры для лосс-функции
     _key_value: False  # KEYWORD, если True, то лосс-функций может быть несколько и тогда их нужно обернуть еще в key-value
 
-    criterion: BCEWithLogitsLoss  # REQUIRED KEYWORD, имя лосс функции
+    criterion: NllLoss  # REQUIRED KEYWORD, имя лосс функции
     # на этом уровне могут лежать параметры для __init__ данной лосс-функции, например
 
 
@@ -89,7 +89,6 @@ stages:  # REQUIRED KEYWORD, словарь всех стадий Catalyst, дл
       scheduler:
         callback: SchedulerCallback
         # для любого коллбека на этом уровне лежат его параметры
-        reduced_metric: *main_metric
       saver:
         callback: CheckpointCallback
         save_n_best: 3
