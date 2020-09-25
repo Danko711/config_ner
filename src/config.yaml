@@ -1,0 +1,96 @@
+# На этом уровне, могут находится любые дополнительные параметры, помимо обязательных ключевых слов
+shared:  # Пример
+  key: &key value
+  key2: &key2 value2
+
+
+model_params:  # REQUIRED KEYWORD, параметры модели (моделей)
+  _key_value: False  # KEYWORD, если True, то моделей может быть несколько и тогда их нужно обернуть еще в key-value
+
+  model: LstmCRF  # REQUIRED KEYWORD Имя класса. Сам класс будет сконструирован в registry по этому имени
+  # на этом уровне могут лежать параметры для __init__ данной модели, например
+  weighted_matrix: vectorizer.embedding_matrix
+  nb_labels: vectorizer.tag_size()
+  embedding_dim: 300
+  hidden_dim: 128
+  char_vocab_size: vectorizer.char_size()
+  char_embedding_dim: 64
+  char_in_channels: 128
+  device: "CPU"
+
+
+
+args:  # REQUIRED KEYWORD, различные аргументы для Catalyst
+  logdir: ../logs  # KEYWORD путь в который будут сохранятся логи (может быть пустым, если передан baselogdir)
+  expdir: "src"  # REQUIRED KEYWORD, путь до вашего эксперимента, с файлом `__init__`, в котором импортируется Experiment, Runner, и, опционально, регистрируются все дополнительные сущности: model, callback, criterion, etc
+  seed: 42  # KEYWORD сид обучения для PyTorch, Numpy, Python и Tensorflow. По умолчанию равен 42
+  deterministic: True  # KEYWORD нужно ли использовать deterministic CuDNN (по умолчанию True)
+  benchmark: False  # KEYWORD нужно ли использовать CuDNN benchmark
+  verbose: True  # KEYWORD нужно ли выводить на консоль информацию об обучении (по умолчанию False)
+  check: True  # KEYWORD, если True, то Catalyst делает только 3 эпохи (чтобы проверить работоспособность пайплайна, по умолчанию False)
+
+
+runner_params:  # OPTIONAL KEYWORD, параметры для инициализации Runner
+  # Например для SupervisedRunner
+  input_key: "features"  # Пример
+  output_key: null  # Пример
+
+
+stages:  # REQUIRED KEYWORD, словарь всех стадий Catalyst, для обучения и/или инфера. Содержат ключевые слова с параметрами, которые применятся ко всем стейджам, так и сами имена стейджей
+  data_params:  # KEYWORD, параметры передаваемые в `ConfigExperiment.get_datasets(...)` (для всех стейджей)
+    batch_size: 64  # KEYWORD, размер батча для всех стейджей
+    num_workers: 0  # KEYWORD, количество параллельных процессов для DataLoader
+    shuffle: True
+
+
+  stage_params:  # REQUIRED KEYWORD, параметры для всех стейджей
+    main_metric: &reduced_metric loss  # REQUIRED KEYWORD, имя метрики, по которой будут отбираться чекпоинты
+    minimize_metric: True  # REQUIRED KEYWORD, флаг, нужно ли минимизировать `main_metric`
+    num_epochs: 100  # KEYWORD, Количество эпох во всех стейджах
+    valid_loader: valid  # KEYWORD, по какому лоадеру будут выбираться чекпоинты
+
+  criterion_params:  # REQUIRED KEYWORD, параметры для лосс-функции
+    _key_value: False  # KEYWORD, если True, то лосс-функций может быть несколько и тогда их нужно обернуть еще в key-value
+
+    criterion: BCEWithLogitsLoss  # REQUIRED KEYWORD, имя лосс функции
+    # на этом уровне могут лежать параметры для __init__ данной лосс-функции, например
+
+
+  optimizer_params:  # REQUIRED KEYWORD, параметры для оптимизатора
+    _key_value: False  # KEYWORD, если True, то оптимизаторов может быть несколько и тогда их нужно обернуть еще в key-value
+
+    lr_linear_scaling:  # KEYWORD, параметры для линейного скейлинга lr
+      lr: 0.001
+      base_batch_size: 64  # KEYWORD, размер базового батча
+
+    optimizer: Adam  # REQUIRED KEYWORD, имя оптимизатора
+    # на этом уровне могут лежать параметры для __init__ данного оптимизатора, например
+    lr: 0.003
+    weight_decay: 0.0001
+
+  scheduler_params:  # REQUIRED KEYWORD, параметры для lr-scheduler
+    _key_value: False  # KEYWORD, если True, то lr-scheduler может быть несколько и тогда их нужно обернуть еще в key-value
+
+    scheduler: StepLR  # REQUIRED KEYWORD, имя lr-scheduler
+    # на этом уровне могут лежать параметры для __init__ данного lr-scheduler, например
+    step_size: 10
+    gamma: 0.3
+
+  stage1:  # Все, что не ключевое слово, расценивается, как имя стейджа. Для тренировки в Catalyst требуется хотябы один стейдж. Имя может быть произвольным
+    stage_params:  # Вы можете переопределить любые параметры, для конкретного стейджа, например
+      num_epochs: 3
+
+    callbacks_params:  # REQUIRED KEYWORD, самая важная часть, тут записываются все коллбеки для данного стейджа
+    # коллбеки записываются через key-value
+      loss:
+        callback: NllLossCallback  # KEYWORD имя коллбека
+      optimizer:
+        callback: OptimizerCallback
+      scheduler:
+        callback: SchedulerCallback
+        # для любого коллбека на этом уровне лежат его параметры
+        reduced_metric: *main_metric
+      saver:
+        callback: CheckpointCallback
+        save_n_best: 3
+
