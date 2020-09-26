@@ -1,5 +1,6 @@
 from collections import OrderedDict
 import pandas as pd
+import pickle
 import gensim
 from catalyst.dl import ConfigExperiment, utils
 
@@ -24,6 +25,8 @@ class Experiment(ConfigExperiment):
         print('Fasttext loaded')
         vectorizer = Vectorizer(texts=texts, tags=tags, word_embedder=ft_vectors)
         print('vectorizer ready')
+        with open('../data/vectorizer/vect.pkl', 'wb') as f:
+            pickle.dummp(vectorizer, f)
 
         datasets = OrderedDict()
 

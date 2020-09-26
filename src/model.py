@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import gensim
+import pickle
 
 from .crf import CRF
 from .vectorizer_orig import Const
@@ -39,8 +39,7 @@ class CNNEmbeddings(nn.Module):
 
 class LstmCrf(nn.Module):
 
-    def __init__(self, weighted_matrix,
-                 nb_labels,
+    def __init__(self, vectorizer_path,
                  embedding_dim,
                  hidden_dim,
                  char_vocab_size,
@@ -49,6 +48,12 @@ class LstmCrf(nn.Module):
                  device):
 
         super().__init__()
+
+        with open('../data/vectorizer/vect.pkl', 'r') as f:
+            vectorizer = pickle.load(f)
+
+        weighted_matrix = vectorizer.emedding_matrix
+        nb_labels = vectorizer.tag_size()
 
         self.device = device
         self.hidden_dim = hidden_dim

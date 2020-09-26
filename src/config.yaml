@@ -9,8 +9,7 @@ model_params:  # REQUIRED KEYWORD, параметры модели (моделе
 
   model: LstmCrf  # REQUIRED KEYWORD Имя класса. Сам класс будет сконструирован в registry по этому имени
   # на этом уровне могут лежать параметры для __init__ данной модели, например
-  weighted_matrix: vectorizer.embedding_matrix
-  nb_labels: vectorizer.tag_size()
+  weighted_matrix: '../data/vectorizer/vect.pkl'
   embedding_dim: 300
   hidden_dim: 128
   char_vocab_size: vectorizer.char_size()
