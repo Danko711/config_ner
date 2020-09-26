@@ -11,7 +11,3 @@ from callbacks.nll_loss import NllLossCallback
 registry.Model(LstmCrf)
 registry.Optimizer(Adam)
 registry.Callback(NllLossCallback)
-
-ft_vectors = gensim.models.fasttext.load_facebook_model('./fasttext/fasttext/wiki.simple.bin')
-print('Fasttext loaded')
-vectorizer = Vectorizer(texts=texts, tags=tags, word_embedder=ft_vectors)
