@@ -42,7 +42,6 @@ class LstmCrf(nn.Module):
     def __init__(self, vectorizer_path,
                  embedding_dim,
                  hidden_dim,
-                 char_vocab_size,
                  char_embedding_dim,
                  char_in_channels,
                  device):
@@ -54,6 +53,7 @@ class LstmCrf(nn.Module):
 
         weighted_matrix = vectorizer.emedding_matrix
         nb_labels = vectorizer.tag_size()
+        char_vocab_size = vectorizer.char_size()
 
         self.device = device
         self.hidden_dim = hidden_dim

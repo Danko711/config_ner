@@ -12,7 +12,6 @@ model_params:  # REQUIRED KEYWORD, параметры модели (моделе
   weighted_matrix: '../data/vectorizer/vect.pkl'
   embedding_dim: 300
   hidden_dim: 128
-  char_vocab_size: vectorizer.char_size()
   char_embedding_dim: 64
   char_in_channels: 128
   device: "CPU"
