@@ -5,8 +5,8 @@ import gensim
 from catalyst.dl import ConfigExperiment, utils
 
 from src.dataset import ConllDataset
-from src.data import Conll2003DatasetReader, PadSequence
-from src.vectorizer_orig import Vectorizer
+from .data import Conll2003DatasetReader, PadSequence
+from .vectorizer_orig import Vectorizer
 
 reader = Conll2003DatasetReader()
 data = reader.read(dataset_name='conll2003', data_path='./')
