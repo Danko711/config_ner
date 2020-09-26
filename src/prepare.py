@@ -2,9 +2,7 @@ from collections import OrderedDict
 import pandas as pd
 import pickle
 import gensim
-from catalyst.dl import ConfigExperiment, utils
 
-from src.dataset import ConllDataset
 from .data import Conll2003DatasetReader, PadSequence
 from .vectorizer_orig import Vectorizer
 
