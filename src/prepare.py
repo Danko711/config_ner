@@ -21,4 +21,3 @@ vectorizer = Vectorizer(texts=texts, tags=tags, word_embedder=ft_vectors)
 print('vectorizer ready')
 with open('../data/vectorizer/vect.pkl', 'wb') as f:
     pickle.dummp(vectorizer, f)
-    
