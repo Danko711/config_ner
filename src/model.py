@@ -48,7 +48,7 @@ class LstmCrf(nn.Module):
 
         super().__init__()
 
-        with open('../data/vectorizer/vect.pkl', 'r') as f:
+        with open(vectorizer_path, 'r') as f:
             vectorizer = pickle.load(f)
 
         weighted_matrix = vectorizer.emedding_matrix
