@@ -10,4 +10,4 @@ from callbacks.nll_loss import NllLossCallback
 
 registry.Model(LstmCrf)
 registry.Optimizer(Adam)
-registry.Callback(NllLossCallback)
+registry.Criterion(NllLossCallback)
