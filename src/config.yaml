@@ -82,8 +82,8 @@ stages:  # REQUIRED KEYWORD, словарь всех стадий Catalyst, дл
 
     callbacks_params:  # REQUIRED KEYWORD, самая важная часть, тут записываются все коллбеки для данного стейджа
     # коллбеки записываются через key-value
-      loss:
-        callback: NllLossCallback  # KEYWORD имя коллбека
+      #loss:
+       # callback: NllLossCallback  # KEYWORD имя коллбека
       optimizer:
         callback: OptimizerCallback
       scheduler:
