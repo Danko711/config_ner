@@ -39,7 +39,7 @@ stages:  # REQUIRED KEYWORD, словарь всех стадий Catalyst, дл
     batch_size: 64  # KEYWORD, размер батча для всех стейджей
     num_workers: 0  # KEYWORD, количество параллельных процессов для DataLoader
     shuffle: True
-    vectorizer_path: './vect.pickle'
+    #vectorizer_path: './vect.pickle'
 
 
   stage_params:  # REQUIRED KEYWORD, параметры для всех стейджей

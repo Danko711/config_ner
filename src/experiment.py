@@ -12,13 +12,13 @@ from src.vectorizer_orig import Vectorizer
 class Experiment(ConfigExperiment):
     @staticmethod
 
-    def get_datasets(vectorizer_path, **kwargs):
+    def get_datasets(**kwargs):
 
         reader = Conll2003DatasetReader()
         data = reader.read(dataset_name='conll2003', data_path='./')
 
 
-        with open(vectorizer_path, 'rb') as f:
+        with open('./vect.pickle', 'rb') as f:
             vectorizer = pickle.load(f)
 
 
