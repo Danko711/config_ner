@@ -12,7 +12,7 @@ from src.vectorizer_orig import Vectorizer
 class Experiment(ConfigExperiment):
     @staticmethod
 
-    def get_datasets(**kwargs):
+    def get_datasets(vectorizer_path, **kwargs):
 
         reader = Conll2003DatasetReader()
         data = reader.read(dataset_name='conll2003', data_path='./')
