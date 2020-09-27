@@ -17,4 +17,4 @@ print('Fasttext loaded')
 vectorizer = Vectorizer(texts=texts, tags=tags, word_embedder=ft_vectors)
 print('vectorizer ready')
 with open('vect.pickle', 'wb') as f:
-    pickle.dummp(vectorizer, f)
+    pickle.dump(vectorizer, f)
