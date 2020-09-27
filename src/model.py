@@ -51,7 +51,7 @@ class LstmCrf(nn.Module):
         with open(vectorizer_path, 'rb') as f:
             vectorizer = pickle.load(f)
 
-        weighted_matrix = vectorizer.emedding_matrix
+        weighted_matrix = vectorizer.embedding_matrix
         nb_labels = vectorizer.tag_size()
         char_vocab_size = vectorizer.char_size()
 
