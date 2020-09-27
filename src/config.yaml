@@ -9,7 +9,7 @@ model_params:  # REQUIRED KEYWORD, параметры модели (моделе
 
   model: LstmCrf  # REQUIRED KEYWORD Имя класса. Сам класс будет сконструирован в registry по этому имени
   # на этом уровне могут лежать параметры для __init__ данной модели, например
-  vectorizer_path: './vect.pkl'
+  vectorizer_path: '../vect.pickle'
   embedding_dim: 300
   hidden_dim: 128
   char_embedding_dim: 64
