@@ -21,7 +21,7 @@ class Experiment(ConfigExperiment):
         tags = pd.Series([i[1] for i in data['train']])
 
         print('start loading fasttext')
-        ft_vectors = gensim.models.fasttext.load_facebook_model('../data/fasttext/fasttext/wiki.simple.bin')
+        ft_vectors = gensim.models.fasttext.load_facebook_model('../fasttext/wiki.simple.bin')
         print('Fasttext loaded')
         vectorizer = Vectorizer(texts=texts, tags=tags, word_embedder=ft_vectors)
         print('vectorizer ready')
