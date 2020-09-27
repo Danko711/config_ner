@@ -16,5 +16,5 @@ ft_vectors = gensim.models.fasttext.load_facebook_model('./fasttext/wiki.simple.
 print('Fasttext loaded')
 vectorizer = Vectorizer(texts=texts, tags=tags, word_embedder=ft_vectors)
 print('vectorizer ready')
-with open('./data/vectorizer/vect.pkl', 'wb') as f:
+with open('./data/vectorizer/vect.pickle', 'wb') as f:
     pickle.dummp(vectorizer, f)
