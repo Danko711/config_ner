@@ -1,10 +1,9 @@
-from collections import OrderedDict
 import pandas as pd
 import pickle
 import gensim
 
-from data import Conll2003DatasetReader, PadSequence
-from vectorizer_orig import Vectorizer
+from src.data import Conll2003DatasetReader
+from src.vectorizer_orig import Vectorizer
 
 reader = Conll2003DatasetReader()
 data = reader.read(dataset_name='conll2003', data_path='./')
