@@ -50,7 +50,9 @@ stages:  # REQUIRED KEYWORD, словарь всех стадий Catalyst, дл
   criterion_params:  # REQUIRED KEYWORD, параметры для лосс-функции
     _key_value: False  # KEYWORD, если True, то лосс-функций может быть несколько и тогда их нужно обернуть еще в key-value
 
-    criterion: NllLossCallback  # REQUIRED KEYWORD, имя лосс функции
+    criterion: CrossEntropyLoss  # REQUIRED KEYWORD, имя лосс функции
+    #input_key: 'x'
+    #output_key: 'crf_nll'
     # на этом уровне могут лежать параметры для __init__ данной лосс-функции, например
 
 
