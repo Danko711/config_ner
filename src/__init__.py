@@ -2,6 +2,7 @@ from .experiment import Experiment
 from catalyst.dl import SupervisedRunner as Runner
 from catalyst.dl import registry
 from torch.optim import Adam
+from .model import LstmCrf
 import gensim
 
 from .vectorizer_orig import Vectorizer
@@ -11,4 +12,4 @@ from .runner import CustomRunner as Runner
 
 registry.Model(LstmCrf)
 registry.Optimizer(Adam)
-registry.Criterion(Runner.model.loss)
+registry.Criterion(LstmCrf.loss)
