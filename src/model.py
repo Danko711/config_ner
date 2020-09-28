@@ -83,13 +83,14 @@ class LstmCrf(nn.Module):
         x, _ = self.lstm(emb_cat, hidden)
 
         emissions = self.fc(x)
-        emissions = F.softmax(emissions, dim=1)
+
 
         return emissions
 
     def forward(self, x, x_char):
         mask = self._get_mask(x)
         emissions = self._lstm(x, x_char)
+        emissions = F.softmax(emissions, dim=1)
         #score, path = self.crf.decode(emissions, mask=mask)
         path = self.crf.decode(emissions, mask=mask)
 
@@ -99,5 +100,6 @@ class LstmCrf(nn.Module):
     def loss(self, x, x_char, y):
         mask = self._get_mask(x)
         emissions = self._lstm(x, x_char)
+        emissions = F.softmax(emissions, dim=1)
         nll = -self.crf(emissions, y, mask=mask)
         return nll
