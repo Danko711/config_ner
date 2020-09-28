@@ -52,7 +52,7 @@ stages:  # REQUIRED KEYWORD, словарь всех стадий Catalyst, дл
     _key_value: False  # KEYWORD, если True, то лосс-функций может быть несколько и тогда их нужно обернуть еще в key-value
 
     criterion: CrfNllCallback  # REQUIRED KEYWORD, имя лосс функции
-    input_key: 'x'
+    input_key: ['x', 'x_char', 'targets']
     output_key: 'crf_nll'
     # на этом уровне могут лежать параметры для __init__ данной лосс-функции, например
 

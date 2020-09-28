@@ -3,20 +3,19 @@ from typing import Dict, List, Union
 from catalyst.core import MetricCallback
 
 
-
 class CrfNllCallback(MetricCallback):
     """
     Callback to compute KL divergence loss
     """
 
     def __init__(
-        self,
-        input_key: Union[str, List[str], Dict[str, str]] = None,
-        output_key: Union[str, List[str], Dict[str, str]] = None,
-        prefix: str = "crf_cll_loss",
-        multiplier: float = 1.0,
-        temperature: float = 1.0,
-        **metric_kwargs,
+            self,
+            input_key: Union[str, List[str], Dict[str, str]] = None,
+            output_key: Union[str, List[str], Dict[str, str]] = None,
+            prefix: str = "crf_cll_loss",
+            multiplier: float = 1.0,
+            temperature: float = 1.0,
+            **metric_kwargs,
     ):
         """
         Args:
@@ -43,11 +42,12 @@ class CrfNllCallback(MetricCallback):
             **metric_kwargs,
         )
 
-
     def metric_fn(
-        self,
-        x,
-        crf_nll
+            self,
+            x,
+            x_chars,
+            targets,
+            crf_nll
     ):
         """
         Computes KL divergence loss for given distributions
@@ -59,8 +59,13 @@ class CrfNllCallback(MetricCallback):
             KL loss
         """
 
-        return crf_nll
+        return crf_nll(sents, x_chars, targets)
 
-    def __call__(self, x, crf_nll):
-
-        return self.metric_fn(x, crf_nll)
+    def __call__(self,
+                 x,
+                 x_chars,
+                 targets,
+                 crf_nll):
+        return self.metric_fn(sents,
+                              x_chars,
+                              targets, crf_nll)

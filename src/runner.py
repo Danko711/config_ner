@@ -32,4 +32,4 @@ class CustomRunner(dl.Runner):
         logits = self.model._lstm(sents, chars)
 
         self.input = {'x': sents, 'x_char': chars, 'targets': tags, 'total_tags': total_tags}  # 'mask': mask,
-        self.output = {'preds': total_preds, 'crf_nll': crf_nll, 'logits': logits}
+        self.output = {'preds': total_preds, 'crf_nll': self.model.loss, 'logits': logits}
