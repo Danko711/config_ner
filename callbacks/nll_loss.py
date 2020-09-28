@@ -59,13 +59,13 @@ class CrfNllCallback(MetricCallback):
             KL loss
         """
 
-        return crf_nll(sents, x_chars, targets)
+        return crf_nll(x, x_chars, targets)
 
     def __call__(self,
                  x,
                  x_chars,
                  targets,
                  crf_nll):
-        return self.metric_fn(sents,
+        return self.metric_fn(x,
                               x_chars,
                               targets, crf_nll)
