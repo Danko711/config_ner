@@ -66,8 +66,8 @@ class CrfNllCallback(MetricCallback):
                  output
                  ):
 
-        x, x_chars, targets = input
-        crf_nll = output
+        x, x_chars, targets, crf_nll = input
+        #crf_nll = output
         return self.metric_fn(x,
                               x_chars,
                               targets, crf_nll)
