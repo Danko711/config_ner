@@ -6,7 +6,7 @@ import pickle
 class CustomRunner(dl.Runner):
 
     def __init__(self, **kwargs):
-        super().__init__(self, **kwargs)
+        super().__init__(**kwargs)
 
         with open('./vect.pickle', 'rb') as f:
             vectorizer = pickle.load(f)
