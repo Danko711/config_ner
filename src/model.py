@@ -44,7 +44,8 @@ class LstmCrf(nn.Module):
                  hidden_dim,
                  char_embedding_dim,
                  char_in_channels,
-                 device):
+                 #device
+                 ):
 
         super().__init__()
 
@@ -55,7 +56,7 @@ class LstmCrf(nn.Module):
         nb_labels = vectorizer.tag_size()
         char_vocab_size = vectorizer.char_size()
 
-        self.device = device
+        #self.device = device
         self.hidden_dim = hidden_dim
 
         self.embeddings = nn.Embedding.from_pretrained(torch.Tensor(weighted_matrix))

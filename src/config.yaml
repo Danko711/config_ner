@@ -14,7 +14,7 @@ model_params:  # REQUIRED KEYWORD, параметры модели (моделе
   hidden_dim: 128
   char_embedding_dim: 64
   char_in_channels: 128
-  device: "CPU"
+  #device: "CPU"
 
 
 
