@@ -7,7 +7,7 @@ import gensim
 from .vectorizer_orig import Vectorizer
 from .model import LstmCrf
 from callbacks.nll_loss import CrfNllCallback
-from .runner import CustomRunner as Runner
+#from .runner import CustomRunner as Runner
 
 registry.Model(LstmCrf)
 registry.Optimizer(Adam)
