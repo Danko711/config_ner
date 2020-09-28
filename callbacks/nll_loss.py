@@ -62,10 +62,11 @@ class CrfNllCallback(MetricCallback):
         return crf_nll(x, x_chars, targets)
 
     def __call__(self,
-                 x,
-                 x_chars,
                  targets,
-                 crf_nll):
+                 crf_nll,
+                 x,
+                 x_chars
+                 ):
         return self.metric_fn(x,
                               x_chars,
                               targets, crf_nll)
