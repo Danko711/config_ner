@@ -11,7 +11,7 @@ class CustomRunner(dl.Runner):
         with open('./vect.pickle', 'rb') as f:
             vectorizer = pickle.load(f)
 
-        self.vectorizer = vectorizer
+        self._vectorizer = vectorizer
 
     def _handle_batch(self, batch):
         features, tags = batch
@@ -26,8 +26,8 @@ class CustomRunner(dl.Runner):
         seq = torch.nn.utils.rnn.pad_sequence(seq_tens, batch_first=True).cpu().numpy()
         seq = torch.Tensor(seq)
 
-        total_preds = [self.vectorizer.devectorize(i) for i in seq]
-        total_tags = [self.vectorizer.devectorize(i) for i in tags]
+        total_preds = [self._vectorizer.devectorize(i) for i in seq]
+        total_tags = [self._vectorizer.devectorize(i) for i in tags]
 
         crf_nll = self.model.loss(sents, chars, tags)
 
