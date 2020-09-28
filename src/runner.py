@@ -29,6 +29,7 @@ class CustomRunner(dl.Runner):
         total_tags = [self.vectorizer.devectorize(i) for i in tags]
 
         crf_nll = self.model.loss(sents, chars, tags)
+        logits = self.model._lstm(sents, chars)
 
         self.input = {'x': sents, 'x_char': chars, 'y': tags, 'total_tags': total_tags}  # 'mask': mask,
-        self.output = {'preds': total_preds, 'crf_nll': crf_nll}
+        self.output = {'preds': total_preds, 'crf_nll': crf_nll, 'logits': logits}
