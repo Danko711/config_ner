@@ -60,3 +60,7 @@ class CrfNllCallback(MetricCallback):
         """
 
         return crf_nll
+
+    def __call__(self, x, crf_nll):
+
+        return self.metric_fn(x, crf_nll)
