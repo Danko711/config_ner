@@ -2,7 +2,7 @@ from .experiment import Experiment
 from catalyst.dl import SupervisedRunner as Runner
 from catalyst.dl import registry
 from torch.optim import Adam
-from torch.nn import NLLLoss
+from torch.nn.functional import cross_entropy
 import gensim
 
 from .vectorizer_orig import Vectorizer
@@ -12,4 +12,4 @@ from .runner import CustomRunner as Runner
 
 registry.Model(LstmCrf)
 registry.Optimizer(Adam)
-registry.Criterion(NLLLoss)
+registry.Criterion(cross_entropy())
