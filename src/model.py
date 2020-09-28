@@ -66,8 +66,8 @@ class LstmCrf(nn.Module):
         self.crf = CRF(nb_labels, True)
 
     def _init_hidden(self, batch_size):
-        return (torch.randn(2, batch_size, self.hidden_dim, device=self.device),
-                torch.randn(2, batch_size, self.hidden_dim, device=self.device))
+        return (torch.randn(2, batch_size, self.hidden_dim),
+                torch.randn(2, batch_size, self.hidden_dim))
 
     def _get_mask(self, tokens):
         return (tokens != Const.PAD_ID).float()
