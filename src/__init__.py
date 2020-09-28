@@ -11,4 +11,4 @@ from .runner import CustomRunner as Runner
 
 registry.Model(LstmCrf)
 registry.Optimizer(Adam)
-registry.Criterion(CrfNllCallback)
+registry.Criterion(Runner.model.loss)
